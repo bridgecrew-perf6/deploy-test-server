@@ -1,0 +1,8 @@
+name: testserver
+description: |
+  Testserver main endpoint for test suite.
+version: 1.0
+category: Test-tools
+maintainer: cgerull@live.com
+license: MIT
+projectURL: https://github.com/cgerull/deploy-test-server/tree/main/charts/testserver
