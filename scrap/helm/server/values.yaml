@@ -49,8 +49,9 @@ port:
 ingress:
   enabled: true
   className: "traefik"
-  annotations: {}
-    # kubernetes.io/ingress.class: traefik
+  annotations:
+    kubernetes.io/ingress.class: traefik
+    traefik.ingress.kubernetes.io/router.middlewares: test-stripprefix
     # traefik.ingress.kubernetes.io/rewrite-target: /$2
     # ingress.kubernetes.io/ssl-redirect: "false"
   hosts:
@@ -91,3 +92,6 @@ nodeSelector: {}
 tolerations: []
 
 affinity: {}
+
+testing:
+  enabled: false
