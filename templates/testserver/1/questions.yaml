@@ -1,0 +1,7 @@
+questions:
+  - variable: SECRET_KEY
+    default: "RancherSecretKey"
+    description: "Rancher overwrite"
+    type: string
+    label: secret
+    required: false
