@@ -59,9 +59,6 @@ ingress:
         - path: /test
           pathType: ImplementationSpecific
   tls: []
-  #  - secretName: chart-example-tls
-  #    hosts:
-  #      - chart-example.local
 
 env:
   - name: SECRET_KEY
@@ -73,8 +70,8 @@ resources:
   # resources, such as Minikube. If you do want to specify resources, uncomment the following
   # lines, adjust them as necessary, and remove the curly braces after 'resources:'.
   limits:
-    cpu: 100m
-    memory: 128Mi
+    cpu: 512m
+    memory: 512Mi
   requests:
     cpu: 100m
     memory: 128Mi
@@ -93,3 +90,29 @@ tolerations: []
 affinity: {}
 
 testEnabled: "False"
+
+secrets: {}
+
+persistentVolumeClaim:
+  name: testserver-volume-claim
+  annotations:
+    volume.beta.kubernetes.io/storage-class: "trident-nfs-n0"
+  storageClassName: trident-nfs-n0
+  accessModes: ReadWriteMany
+  volumeMode: Filesystem
+  capacity: 1Gi
+
+volumeMounts:
+  - name: testserver-data
+    mountPath: /var/lib/testserver
+  # - name: secrets
+  #   mountPath: /etc/secrets
+  #   readOnly: true
+
+volumes:
+  - name: testserver-data
+    persistentVolumeClaim:
+      claimName: testserver-volume-claim
+  # - name: secrets
+  #   secret:
+  #     secretName: testserver
